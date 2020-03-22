@@ -78,7 +78,11 @@ namespace Spine
                 var cropped_and_rotated = new TransformedBitmap();
                 cropped_and_rotated.BeginInit();
                 cropped_and_rotated.Source = new CroppedBitmap(bitmap, srcRect);
-                cropped_and_rotated.Transform = new RotateTransform(90, srcRect.Width/2.0f, srcRect.Height/2.0f);
+                var t = new TransformGroup();
+                t.Children.Add(new RotateTransform(90, srcRect.Width / 2.0f, srcRect.Height / 2.0f));
+                t.Children.Add(new ScaleTransform(1, -1, 0, 0));
+
+                cropped_and_rotated.Transform = t;
                 cropped_and_rotated.EndInit();
                 target = cropped_and_rotated;
 
